@@ -8,6 +8,17 @@ from kivy.uix.stacklayout import StackLayout
 from kivy.metrics import dp
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.pagelayout import PageLayout
+from kivy.properties import StringProperty
+
+
+class WidgetExample(GridLayout):
+    my_text = StringProperty("How many clicks?")
+    count = 0
+    def on_button_click(self):
+        self.count += 1
+        self.my_text = str(self.count)
+        print("Clicked")
+        pass
 
 class PageLayoutExample(PageLayout):
     pass
@@ -23,7 +34,7 @@ class StackLayoutExample(StackLayout):
         for i in range(0,100):
             #size = dp(100)
             #b = Button(text=str(i+1),size_hint=(None,None),size=(size,size))
-            b = Button(text=str(i+1),size_hint=(1,None),size=(1,dp(100)))
+            b = Button(text=str(i+1),size_hint=(1,None),size=(1,dp(40)))
             self.add_widget(b)
 
     pass
