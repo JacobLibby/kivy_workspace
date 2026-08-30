@@ -8,18 +8,46 @@ from kivy.uix.stacklayout import StackLayout
 from kivy.metrics import dp
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.pagelayout import PageLayout
-from kivy.properties import StringProperty
+from kivy.properties import StringProperty, BooleanProperty
 
 
 class WidgetExample(GridLayout):
     my_text = StringProperty("How many clicks?")
     count = 0
+    validated_text = StringProperty("")
+    # slider_value_txt = StringProperty("50")
+    count_enabled = BooleanProperty(False)
+    def on_toggle_button_state(self,widget):
+        print(f"toggle state: {widget.state}")
+        if widget.state == "down":
+            widget.text = "ON"
+            self.count_enabled = True
+        else:
+            widget.text = "OFF"
+            self.count_enabled = False
+
+
     def on_button_click(self):
-        self.count += 1
-        self.my_text = str(self.count)
-        print("Clicked")
+        if self.count_enabled:
+            self.count += 1
+            self.my_text = str(self.count)
+            print("Clicked")
         pass
 
+    def on_switch_active(self,widget):
+        print(f"Switch: {widget.active}")
+
+    # def on_slider_touch_up(self,widget):
+    #     # print(widget.value)
+    #     pass
+    # def on_slider_value(self,widget):
+    #     # self.slider_value_txt = str(int(widget.value))
+    #     # print(f"Slider Value: {int(widget.value)}")
+    #     pass
+
+    def on_text_validate(self,widget):
+        self.validated_text = widget.text
+        pass
 class PageLayoutExample(PageLayout):
     pass
 

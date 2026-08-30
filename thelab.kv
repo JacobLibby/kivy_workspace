@@ -2,12 +2,60 @@ WidgetExample:
 
 <WidgetExample>:
     cols: 3
+    ToggleButton:
+        text: "OFF"
+        on_state: root.on_toggle_button_state(self)
+        font_size: "40dp"
+        color: 1,0,0,1
+        font_name: "fonts/ofont.ru_Fixedsys.ttf"
+        size_hint: None,1
+        width: "100dp"
+
     Button:
         text: "Click Here!"
         on_press: root.on_button_click()
-    Label:
-        text: root.my_text
+        disabled: not root.count_enabled
 
+    Label:
+        font_name: "fonts/ofont.ru_Fixedsys.ttf" 
+        text: root.my_text
+        font_size: "40dp"
+        color: 1,0,0,1
+
+    Switch:
+        id: my_switch
+        width: "100dp"
+        size_hint: None,1
+        on_active: root.on_switch_active(self)
+        active: True
+
+    Slider:
+        id: my_slider
+        min: 0
+        max: 100
+        step: 1
+        #on_touch_up: root.on_slider_touch_up(self)
+        #on_value: root.on_slider_value(self)
+        value: 50
+        disabled: not my_switch.active
+        #orientation: "vertical"
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            text: str(int(my_slider.value))
+        ProgressBar:
+            value: my_slider.value
+            max: 100
+    TextInput:
+        id: my_text_input
+        font_name: "fonts/ofont.ru_Fixedsys.ttf"
+        size_hint: None,1
+        width: "100dp"
+        suggestion: "foo"
+        multiline: False
+        on_text_validate: root.on_text_validate(self)
+    Label:
+        text: root.validated_text
 
 <PageLayoutExample>:
     MainWidget:
@@ -75,6 +123,7 @@ WidgetExample:
         Button:
             text: "B"
 <BoxLayoutExample>:
+    font_name: "fonts/ofont.ru_Fixedsys.ttf" 
     orientation: "vertical"
     AnchorLayout:
         anchor_x: "center"
