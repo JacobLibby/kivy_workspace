@@ -48,6 +48,7 @@ class WidgetExample(GridLayout):
     def on_text_validate(self,widget):
         self.validated_text = widget.text
         pass
+    
 class PageLayoutExample(PageLayout):
     pass
 
